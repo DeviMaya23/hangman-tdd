@@ -71,10 +71,12 @@ phrase_list = [
 
 class Dictionary:
     """Class that contains the dictionary used for hangman game"""
-    def __init__(self):
+    def __init__(self, custom_word_list=None, custom_phrase_list=None):
         """Intial function to create dictionary class"""
-        self.word_list = word_list
-        self.phrase_list = phrase_list
+        self.word_list = custom_word_list \
+            if custom_word_list is not None else word_list
+        self.phrase_list = custom_phrase_list \
+            if custom_phrase_list is not None else phrase_list
 
     def get_word(self):
         """A function that retrieves a single word from the dictionary"""
