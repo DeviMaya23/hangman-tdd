@@ -1,20 +1,36 @@
+"""Test module for the module game"""
+
 import pytest
 from game import Game
 
 
 @pytest.mark.parametrize(
-    ("word", "answer", "result", "life", "revealed", "correct_characters"),
+    ("word", "answer", "result"),
     [
-        ("pity", "y", 1, 5, {3}, {"y"}),
-        ("pity", "a", 0, 4, {}, {}),
-        ("pity", "P", 1, 5, {0}, {"p"}),
-        ("small", "l", 1, 5, {3, 4}, {"l"})
+        ("pity", "y", 1),
+        ("pity", "a", 0),
+        ("pity", "P", 1)
     ]
 )
-def test_check_answer(
-        word, answer, result, life, revealed, correct_characters):
+def test_check_answer_result(
+        word, answer, result):
     game = Game(word)
     assert game.check_answer(answer) == result
+
+
+@pytest.mark.parametrize(
+    ("word", "answer", "life", "revealed", "correct_characters"),
+    [
+        ("pity", "y", 5, {3}, {"y"}),
+        ("pity", "a", 4, {}, {}),
+        ("pity", "P", 5, {0}, {"p"}),
+        ("small", "l", 5, {3, 4}, {"l"})
+    ]
+)
+def test_check_answer_state(
+        word, answer, life, revealed, correct_characters):
+    game = Game(word)
+    game.check_answer(answer)
     assert game.life == life
     assert sorted(game.revealed) == sorted(revealed)
     assert sorted(game.correct_characters) == sorted(correct_characters)
@@ -28,10 +44,10 @@ def test_check_answer(
         ("Small", {0, 3, 4}, "s _ _ l l")
     ]
 )
-def test_current_word(word, revealed, expected):
+def test_current_answer(word, revealed, expected):
     game = Game(word)
     game.revealed = revealed
-    assert game.current_word() == expected
+    assert game.current_answer() == expected
 
 
 @pytest.mark.parametrize(
