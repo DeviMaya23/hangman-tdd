@@ -3,6 +3,7 @@ class Game:
         self.word = word
         self.life = 5
         self.revealed = []
+        self.correct_characters = []
 
     def check_answer(self, answer):
         found = 0
@@ -13,4 +14,5 @@ class Game:
         if not found:
             self.life = self.life - 1
             return 0
+        self.correct_characters.append(answer)
         return 1
