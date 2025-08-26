@@ -48,8 +48,7 @@ def test_check_answer_state(
 
 def _example_in_progress_game():
     """
-    Function that returns an ongoing game to be used in
-    test_check_answer_game_in_progress()
+    Helper function that returns an ongoing game to be used in testing.
     """
     game = Game("small")
     game.check_answer("s")
@@ -162,3 +161,13 @@ def test_is_game_finished(answer, revealed, expected):
     game = Game(answer)
     game.revealed = revealed
     assert game.is_game_finished() == expected
+
+
+def test_deduct_life():
+    """
+    Test case for checking if the function deduct_life
+    correctly deducts one life in the game state.
+    """
+    game = Game("Test")
+    game.deduct_life()
+    assert game.life == 4

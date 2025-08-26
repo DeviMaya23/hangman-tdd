@@ -33,7 +33,7 @@ class Game:
                 self.revealed.add(i)
                 found = 1
         if not found:
-            self.life = self.life - 1
+            self.deduct_life()
             return 0
         self.correct_characters.add(guess)
         return 1
@@ -85,3 +85,7 @@ class Game:
         guess = guess.lower()
         if guess in self.correct_characters:
             raise ValueError(errors.ERROR_INPUT_USED)
+
+    def deduct_life(self):
+        """Function that deducts one life from the player"""
+        self.life = self.life - 1
