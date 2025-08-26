@@ -66,6 +66,14 @@ class Game:
         """
         return self.life > 0
 
+    def is_game_finished(self):
+        """Function that returns whether or not the game is finished
+
+        Returns:
+            bool: Returns true if every character is revealed
+        """
+        return len(self.revealed) == len(self.answer)
+
     def validate_guess(self, guess):
         """Function that validates whether or not the guess is valid"""
         if len(guess) != 1 or not guess.isalpha():

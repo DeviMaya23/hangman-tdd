@@ -142,3 +142,19 @@ def test_validate_guess_incorrect(
     """
     with pytest.raises(exception, match=error_message):
         current_game.validate_guess(guess)
+
+
+@pytest.mark.parametrize(
+    ("answer", "revealed", "expected"),
+    [
+        ("Me", {0, 1}, 1)
+    ]
+)
+def test_is_game_finished(answer, revealed, expected):
+    """
+    Test case for checking if the function is_game_finished
+    returns correct value.
+    """
+    game = Game(answer)
+    game.revealed = revealed
+    assert game.is_game_finished() == expected
