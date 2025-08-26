@@ -1,6 +1,7 @@
 """Test module for the module game"""
 
 import pytest
+import errors
 from game import Game
 
 
@@ -120,3 +121,24 @@ def test_validate_guess_correct(current_game, guess):
     runs correctly.
     """
     assert current_game.validate_guess(guess) is None
+
+
+@pytest.mark.parametrize(
+    ("current_game", "guess", "exception", "error_message"),
+    [
+        (_example_in_progress_game(), "s", ValueError,
+            errors.ERROR_INPUT_USED),
+        (_example_in_progress_game(), "@", ValueError,
+            errors.ERROR_INPUT_INVALID),
+        (_example_in_progress_game(), "sa", ValueError,
+            errors.ERROR_INPUT_INVALID)
+    ]
+)
+def test_validate_guess_incorrect(
+        current_game, guess, exception, error_message):
+    """
+    Test case for checking if the function validate_guess
+    returns correct error message for a failed input validation.
+    """
+    with pytest.raises(exception, match=error_message):
+        current_game.validate_guess(guess)

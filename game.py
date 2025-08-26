@@ -1,5 +1,6 @@
 """This module provides a class that represents a hangman game with its
 various functions."""
+import errors
 
 
 class Game:
@@ -67,3 +68,9 @@ class Game:
 
     def validate_guess(self, guess):
         """Function that validates whether or not the guess is valid"""
+        if len(guess) != 1 or not guess.isalpha():
+            raise ValueError(errors.ERROR_INPUT_INVALID)
+
+        guess = guess.lower()
+        if guess in self.correct_characters:
+            raise ValueError(errors.ERROR_INPUT_USED)
