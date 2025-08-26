@@ -32,3 +32,16 @@ def test_current_word(word, revealed, expected):
     game = Game(word)
     game.revealed = revealed
     assert game.current_word() == expected
+
+
+@pytest.mark.parametrize(
+    ("life", "expected"),
+    [
+        (2, 1),
+        (0, 0)
+    ]
+)
+def test_is_game_alive(life, expected):
+    game = Game("test")
+    game.life = life
+    assert game.is_game_alive() == expected

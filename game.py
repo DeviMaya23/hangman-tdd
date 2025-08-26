@@ -31,3 +31,6 @@ class Game:
             else:
                 output += "_"
         return output
+
+    def is_game_alive(self):
+        return self.life > 0
