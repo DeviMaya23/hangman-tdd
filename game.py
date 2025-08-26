@@ -78,7 +78,11 @@ class Game:
         return len(self.revealed) == length
 
     def validate_guess(self, guess):
-        """Function that validates whether or not the guess is valid"""
+        """
+        Function that validates whether or not the guess is valid
+        - Single character
+        - Alpha character only (a-zA-Z)
+        """
         if len(guess) != 1 or not guess.isalpha():
             raise ValueError(errors.ERROR_INPUT_INVALID)
 

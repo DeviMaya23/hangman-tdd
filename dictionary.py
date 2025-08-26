@@ -79,9 +79,19 @@ class Dictionary:
             if custom_phrase_list is not None else phrase_list
 
     def get_word(self):
-        """A function that retrieves a single word from the dictionary"""
+        """
+        A function that retrieves a single word from the dictionary
+
+        Returns:
+            string: a random element from the attribute word_list
+        """
         return random.choice(self.word_list)
 
     def get_phrase(self):
-        """A function that retrieves a single phrase from the dictionary"""
+        """
+        A function that retrieves a single phrase from the dictionary
+
+        Returns:
+            string: a random element from the attribute phrase_list
+        """
         return random.choice(self.phrase_list)
