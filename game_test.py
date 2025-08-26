@@ -12,8 +12,11 @@ from game import Game
         ("pity", "P", 1)
     ]
 )
-def test_check_answer_result(
-        word, answer, result):
+def test_check_answer_result(word, answer, result):
+    """
+    Test case for checking if the function check_answer returns the correct
+    value or not.
+    """
     game = Game(word)
     assert game.check_answer(answer) == result
 
@@ -29,6 +32,10 @@ def test_check_answer_result(
 )
 def test_check_answer_state(
         word, answer, life, revealed, correct_characters):
+    """
+    Test case for checking if the function check_answer updates the
+    game attributes correctly or not.
+    """
     game = Game(word)
     game.check_answer(answer)
     assert game.life == life
@@ -37,6 +44,10 @@ def test_check_answer_state(
 
 
 def _check_answer_game_in_progress_game():
+    """
+    Function that returns an ongoing game to be used in
+    test_check_answer_game_in_progress()
+    """
     game = Game("small")
     game.check_answer("s")
     return game
@@ -51,6 +62,10 @@ def _check_answer_game_in_progress_game():
 )
 def test_check_answer_game_in_progress(
         game, answer, life, revealed, correct_characters):
+    """
+    Test case for checking if the function check_answer updates the
+    game attributes of an ongoing game correctly or not.
+    """
     game.check_answer(answer)
     assert game.life == life
     assert sorted(game.revealed) == sorted(revealed)
@@ -66,6 +81,10 @@ def test_check_answer_game_in_progress(
     ]
 )
 def test_current_answer(word, revealed, expected):
+    """
+    Test case for checking if the function current_answer
+    prints out the current answer correctly or not.
+    """
     game = Game(word)
     game.revealed = revealed
     assert game.current_answer() == expected
@@ -79,6 +98,10 @@ def test_current_answer(word, revealed, expected):
     ]
 )
 def test_is_game_alive(life, expected):
+    """
+    Test case for checking if the function is_game_alive
+    returns correct value.
+    """
     game = Game("test")
     game.life = life
     assert game.is_game_alive() == expected
