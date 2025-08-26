@@ -36,6 +36,27 @@ def test_check_answer_state(
     assert sorted(game.correct_characters) == sorted(correct_characters)
 
 
+def _check_answer_game_in_progress_game():
+    game = Game("small")
+    game.check_answer("s")
+    return game
+
+
+@pytest.mark.parametrize(
+    ("game", "answer", "life", "revealed", "correct_characters"),
+    [
+        (_check_answer_game_in_progress_game(), "l", 5, {0, 3, 4}, {"s", "l"}),
+        (_check_answer_game_in_progress_game(), "k", 4, {0}, {"s"})
+    ]
+)
+def test_check_answer_game_in_progress(
+        game, answer, life, revealed, correct_characters):
+    game.check_answer(answer)
+    assert game.life == life
+    assert sorted(game.revealed) == sorted(revealed)
+    assert sorted(game.correct_characters) == sorted(correct_characters)
+
+
 @pytest.mark.parametrize(
     ("word", "revealed", "expected"),
     [
