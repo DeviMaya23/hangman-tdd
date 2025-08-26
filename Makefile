@@ -1,5 +1,7 @@
-lint:
-	flake8 game.py
-	flake8 game_test.py
-	pylint game.py
-	pylint game_test.py
+lint: 
+	@for py in *.py; do \
+	 echo "flake8 $$py"; \
+	 flake8 $$py; \
+	 echo "pylint $$py"; \
+	 pylint $$py; \
+	 done
