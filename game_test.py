@@ -43,7 +43,7 @@ def test_check_answer_state(
     assert sorted(game.correct_characters) == sorted(correct_characters)
 
 
-def _check_answer_game_in_progress_game():
+def _example_in_progress_game():
     """
     Function that returns an ongoing game to be used in
     test_check_answer_game_in_progress()
@@ -56,8 +56,8 @@ def _check_answer_game_in_progress_game():
 @pytest.mark.parametrize(
     ("game", "answer", "life", "revealed", "correct_characters"),
     [
-        (_check_answer_game_in_progress_game(), "l", 5, {0, 3, 4}, {"s", "l"}),
-        (_check_answer_game_in_progress_game(), "k", 4, {0}, {"s"})
+        (_example_in_progress_game(), "l", 5, {0, 3, 4}, {"s", "l"}),
+        (_example_in_progress_game(), "k", 4, {0}, {"s"})
     ]
 )
 def test_check_answer_game_in_progress(
@@ -105,3 +105,18 @@ def test_is_game_alive(life, expected):
     game = Game("test")
     game.life = life
     assert game.is_game_alive() == expected
+
+
+@pytest.mark.parametrize(
+    ("current_game", "guess"),
+    [
+        (_example_in_progress_game(), "l"),
+        (_example_in_progress_game(), "L")
+    ]
+)
+def test_validate_guess_correct(current_game, guess):
+    """
+    Test case for checking if the function validate_guess
+    runs correctly.
+    """
+    assert current_game.validate_guess(guess) is None

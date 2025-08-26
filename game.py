@@ -64,3 +64,6 @@ class Game:
             bool: Returns true if the game still has more than 0 life.
         """
         return self.life > 0
+
+    def validate_guess(self, guess):
+        """Function that validates whether or not the guess is valid"""
