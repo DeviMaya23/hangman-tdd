@@ -17,3 +17,17 @@ class Game:
             return 0
         self.correct_characters.append(answer)
         return 1
+
+    def current_word(self):
+        output = ""
+        start_flag = 1
+        for i, character in enumerate(self.word):
+            if start_flag:
+                start_flag = 0
+            else:
+                output += " "
+            if i in self.revealed:
+                output += character
+            else:
+                output += "_"
+        return output
