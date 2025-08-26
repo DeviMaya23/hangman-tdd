@@ -5,9 +5,10 @@ from game import Game
 @pytest.mark.parametrize(
     ("word", "answer", "result", "life", "revealed", "correct_characters"),
     [
-        ("Pity", "y", 1, 5, [3], ["y"]),
-        ("Pity", "a", 0, 4, [], []),
-        ("Small", "l", 1, 5, [3, 4], ["l"])
+        ("pity", "y", 1, 5, [3], ["y"]),
+        ("pity", "a", 0, 4, [], []),
+        ("pity", "P", 1, 5, [0], ["p"]),
+        ("small", "l", 1, 5, [3, 4], ["l"])
     ]
 )
 def test_check_answer(

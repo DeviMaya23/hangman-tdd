@@ -1,12 +1,13 @@
 class Game:
     def __init__(self, word):
-        self.word = word
+        self.word = word.lower()
         self.life = 5
         self.revealed = []
         self.correct_characters = []
 
     def check_answer(self, answer):
         found = 0
+        answer = answer.lower()
         for i, character in enumerate(self.word):
             if character == answer:
                 self.revealed.append(i)
