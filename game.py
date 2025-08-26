@@ -52,7 +52,9 @@ class Game:
                 start_flag = 0
             else:
                 output += " "
-            if i in self.revealed:
+            if character == " ":
+                output += " "
+            elif i in self.revealed:
                 output += character
             else:
                 output += "_"
@@ -72,7 +74,8 @@ class Game:
         Returns:
             bool: Returns true if every character is revealed
         """
-        return len(self.revealed) == len(self.answer)
+        length = len(self.answer.replace(" ", ""))
+        return len(self.revealed) == length
 
     def validate_guess(self, guess):
         """Function that validates whether or not the guess is valid"""

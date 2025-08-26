@@ -10,7 +10,8 @@ from game import Game
     [
         ("pity", "y", 1),
         ("pity", "a", 0),
-        ("pity", "P", 1)
+        ("pity", "P", 1),
+        ("small favours", "s", 1)
     ]
 )
 def test_check_answer_result(word, answer, result):
@@ -28,7 +29,8 @@ def test_check_answer_result(word, answer, result):
         ("pity", "y", 5, {3}, {"y"}),
         ("pity", "a", 4, {}, {}),
         ("pity", "P", 5, {0}, {"p"}),
-        ("small", "l", 5, {3, 4}, {"l"})
+        ("small", "l", 5, {3, 4}, {"l"}),
+        ("small favours", "s", 5, {0, 12}, {"s"})
     ]
 )
 def test_check_answer_state(
@@ -78,7 +80,8 @@ def test_check_answer_game_in_progress(
     [
         ("Pity", {3}, "_ _ _ y"),
         ("Pity", {}, "_ _ _ _"),
-        ("Small", {0, 3, 4}, "s _ _ l l")
+        ("Small", {0, 3, 4}, "s _ _ l l"),
+        ("Small favours", {0, 3, 4, 12}, "s _ _ l l   _ _ _ _ _ _ s")
     ]
 )
 def test_current_answer(word, revealed, expected):
@@ -147,7 +150,8 @@ def test_validate_guess_incorrect(
 @pytest.mark.parametrize(
     ("answer", "revealed", "expected"),
     [
-        ("Me", {0, 1}, 1)
+        ("Me", {0, 1}, 1),
+        ("Me Want", {0, 1, 3, 4, 5, 6}, 1)
     ]
 )
 def test_is_game_finished(answer, revealed, expected):
