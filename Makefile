@@ -5,5 +5,7 @@ unit-test:
 	cd tests/unit && pytest
 integration-test:
 	cd tests/integration && pytest
+test-coverage:
+	pytest --cov=src
 run:
 	PYTHONPATH=src python main.py
