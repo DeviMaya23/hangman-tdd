@@ -1,10 +1,9 @@
 """Module for console hangman python game"""
-
-from game import Game
-from dictionary import Dictionary
 import time
 import threading
 from inputimeout import inputimeout, TimeoutOccurred
+from game import Game
+from dictionary import Dictionary
 
 
 # Timer constant
@@ -12,8 +11,8 @@ INPUT_TIMER_SECOND = 5
 
 
 # Global variable for threading purposes
-user_input = None
-is_countdown_finished = 0
+# Disabled the pylint because this is a global variable
+is_countdown_finished = 0  # pylint: disable=invalid-name
 
 
 def countdown_timer():
@@ -23,6 +22,7 @@ def countdown_timer():
     global is_countdown_finished
     for x in range(INPUT_TIMER_SECOND, 0, -1):
         if is_countdown_finished:
+            is_countdown_finished = 1
             break
         print("Time:", x)
         print("Enter your guess :")

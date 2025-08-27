@@ -1,7 +1,7 @@
 """Testing module"""
+from inputimeout import TimeoutOccurred
 from console_hangman import run_game
 from game import Game
-from inputimeout import TimeoutOccurred
 
 
 def test_run_game_win(monkeypatch):

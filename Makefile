@@ -1,10 +1,6 @@
-lint: 
-	@for py in *.py; do \
-	 echo "flake8 $$py"; \
-	 flake8 $$py; \
-	 echo "pylint $$py"; \
-	 pylint $$py; \
-	 done
+lint:
+	PYTHONPATH=src flake8 src tests main.py
+	PYTHONPATH=src pylint src tests main.py
 unit-test:
 	cd tests/unit && pytest
 integration-test:
