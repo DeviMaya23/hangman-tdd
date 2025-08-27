@@ -8,21 +8,18 @@ from dictionary import Dictionary
 
 # Timer constant
 INPUT_TIMER_SECOND = 5
-
-
-# Global variable for threading purposes
-# Disabled the pylint because this is a global variable
-is_countdown_finished = 0  # pylint: disable=invalid-name
+# Thread event for countdown
+is_countdown_finished = threading.Event()
 
 
 def countdown_timer():
     """
     Function used to print out a timer counting down.
+    It will stop the countdown prematurely if
+    is_countdown_finished is already set.
     """
-    global is_countdown_finished
     for x in range(INPUT_TIMER_SECOND, 0, -1):
-        if is_countdown_finished:
-            is_countdown_finished = 1
+        if is_countdown_finished.is_set():
             break
         print("Time:", x)
         print("Enter your guess :")
@@ -34,22 +31,23 @@ def get_guess_timed():
     Function used to get user's guess
     with a timer counting down.
     """
-    global is_countdown_finished
-    is_countdown_finished = 0
-
+    # Clears event flag & starts countdown in a new thread
+    is_countdown_finished.clear()
     thread = threading.Thread(target=countdown_timer)
     thread.daemon = True
     thread.start()
 
+    # Gets user input with a timeout
+    # Flags the event flag if input received/timer ran out
     guess = None
     try:
         guess = inputimeout(
             prompt="", timeout=INPUT_TIMER_SECOND
         )
-        is_countdown_finished = 1
+        is_countdown_finished.set()
         thread.join()
     except TimeoutOccurred:
-        is_countdown_finished = 1
+        is_countdown_finished.set()
         thread.join()
         guess = None
 
@@ -97,6 +95,7 @@ def run_game(game):
             else:
                 break
         if guess is None:
+            print("Ran out of time :( lost 1 attempt.")
             continue
         if game.check_answer(guess):
             print("\nCorrect guess!")
@@ -105,7 +104,7 @@ def run_game(game):
                 break
         else:
             print("\nIncorrect...")
-            if not game.is_game_alive():
-                print("\n\nGame over :(")
 
+    if not game.is_game_alive():
+        print("\n\nGame over :(")
     print("The answer is: ", game.answer)
