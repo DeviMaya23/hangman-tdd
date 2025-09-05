@@ -7,7 +7,7 @@ from dictionary import Dictionary
 
 
 # Timer constant
-INPUT_TIMER_SECOND = 5
+INPUT_TIMER_SECOND = 15
 # Thread event for countdown
 is_countdown_finished = threading.Event()
 
